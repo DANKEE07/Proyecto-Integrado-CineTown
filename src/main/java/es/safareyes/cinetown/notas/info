@@ -1,0 +1,25 @@
+Respecto a las Querys:
+
+Vamos a suponer que tengo este código:
+
+    @Entity
+    @Table(name = "pelicula", schema = "cinetown")
+    public class Pelicula {
+        @Id
+        private Integer id;
+
+        private String titulo;
+    }
+
+JPQL (osea, no nativo) lo pensaría así:
+
+    @Query("SELECT p FROM Pelicula p WHERE p.titulo LIKE :titulo")
+    "Dame objetos Pelicula cuyo atributo titulo cumpla esto."
+
+SQL Nativo lo pensaría así:
+
+    @Query(
+        value = "SELECT * FROM cinetown.pelicula WHERE titulo LIKE :titulo",
+        nativeQuery = true
+    )
+    "PostgreSQL, dame las filas de la tabla cinetown.pelicula cuyo campo titulo cumpla esto."
