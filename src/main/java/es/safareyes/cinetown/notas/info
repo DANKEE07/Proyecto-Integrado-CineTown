@@ -1,3 +1,27 @@
+
+ENDPOINT 1 : OK
+ENDPOINT 2 : OK
+ENDPOINT 3 : X
+ENDPOINT 4 : X
+ENDPOINT 5 : X
+ENDPOINT 6 : OK
+ENDPOINT 7 : OK
+ENDPOINT 8 : X
+ENDPOINT 9 : X
+ENDPOINT 10 : X
+ENDPOINT 11 : X
+ENDPOINT 12 : X
+ENDPOINT 13 : X
+ENDPOINT 14 : X
+ENDPOINT 15 : X
+ENDPOINT 16 : X
+
+
+
+
+
+////////////
+
 Respecto a las Querys:
 
 Vamos a suponer que tengo este código:
