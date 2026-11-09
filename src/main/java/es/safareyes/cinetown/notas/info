@@ -23,3 +23,4 @@ SQL Nativo lo pensaría así:
         nativeQuery = true
     )
     "PostgreSQL, dame las filas de la tabla cinetown.pelicula cuyo campo titulo cumpla esto."
+

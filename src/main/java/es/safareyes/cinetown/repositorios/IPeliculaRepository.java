@@ -12,8 +12,8 @@ import java.util.Optional;
 public interface IPeliculaRepository extends JpaRepository<Pelicula, Integer> {
 
     // Listado paginado con Filtros (Filtro de nombre)
-    @Query(value = "SELECT p FROM Pelicula p WHERE p.titulo LIKE :titulo")
-    List<Pelicula> buscarPorTitulo(@Param("titulo") String titulo);
+    @Query("SELECT DISTINCT p FROM Pelicula p LEFT JOIN FETCH p.generos")
+    List<Pelicula> buscarTodasLasPeliculasConGeneros();
 
     // Detalle y género de la película
     @Query("SELECT DISTINCT p FROM Pelicula p LEFT JOIN FETCH p.generos WHERE p.id = :id")

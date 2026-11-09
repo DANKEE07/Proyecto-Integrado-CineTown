@@ -19,12 +19,11 @@ public class PeliculaService {
 
     public PeliculaDTO consultarPorIdConGeneros(Integer id) {
         return repository.buscarPorIdConGeneros(id).map(mapper::toDTO)
-                .orElseThrow(() ->  new ElementoNoEncontrado("Pelicula no encontrada"))
-                ;
+                .orElseThrow(() -> new ElementoNoEncontrado("Pelicula no encontrada"));
     }
 
-    public List<Pelicula> consultarTodas() {
-        return repository.findAll();
+    public List<PeliculaDTO> buscarTodasLasPeliculas() {
+        return mapper.toDTO(repository.buscarTodasLasPeliculasConGeneros());
     }
 
 }
