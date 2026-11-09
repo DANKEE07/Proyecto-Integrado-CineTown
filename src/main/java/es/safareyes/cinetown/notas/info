@@ -24,3 +24,8 @@ SQL Nativo lo pensaría así:
     )
     "PostgreSQL, dame las filas de la tabla cinetown.pelicula cuyo campo titulo cumpla esto."
 
+Si el proyecto presenta problemas durante la programación, he descubierto que en el proyecto si es Maven,
+si le das a la barra derecha a la opción de Maven > Tu proyecto de Maven (Proyecto Integrado CineTown) >
+Puedes hacer un clean y un compile, así si durante las pruebas se han creado con errores los archivos de Impl en
+el target > generated-sources, puedes volver a compilarlos para ver si al volverse a crear obtienen correctamente
+los datos
