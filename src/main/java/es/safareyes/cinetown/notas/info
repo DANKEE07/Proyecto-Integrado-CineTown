@@ -25,7 +25,7 @@ ENDPOINT 4 : OK     -> PUT http://localhost:8080/api/v1/peliculas/1
     "generos": [1, 2]
 }
 
-ENDPOINT 5 : X
+ENDPOINT 5 : ...
 ENDPOINT 6 : OK     -> GET http://localhost:8080/api/v1/generos
 ENDPOINT 7 : OK     -> GET http://localhost:8080/api/v1/salas
 ENDPOINT 8 : X
