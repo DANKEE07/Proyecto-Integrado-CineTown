@@ -1,11 +1,33 @@
 
-ENDPOINT 1 : OK
-ENDPOINT 2 : OK
-ENDPOINT 3 : X
-ENDPOINT 4 : X
+ENDPOINT 1 : OK     -> GET http://localhost:8080/api/v1/peliculas/
+ENDPOINT 2 : OK     -> GET http://localhost:8080/api/v1/peliculas/{id}
+ENDPOINT 3 : OK     -> POST http://localhost:8080/api/v1/peliculas
+
+Script prueba para el Post del endpoint 3:
+
+{
+    "anio": 2026,
+    "titulo": "Película de prueba",
+    "clasificacion": "MAYORES_12",
+    "duracion": 120,
+    "sinopsis": "Esta es una película creada para probar el endpoint.",
+    "generos": [1]
+}
+
+ENDPOINT 4 : OK     -> PUT http://localhost:8080/api/v1/peliculas/1
+
+{
+    "anio": 2026,
+    "titulo": "Película modificada",
+    "clasificacion": "MAYORES_16",
+    "duracion": 150,
+    "sinopsis": "Hemos modificado los datos de esta película.",
+    "generos": [1, 2]
+}
+
 ENDPOINT 5 : X
-ENDPOINT 6 : OK
-ENDPOINT 7 : OK
+ENDPOINT 6 : OK     -> GET http://localhost:8080/api/v1/generos
+ENDPOINT 7 : OK     -> GET http://localhost:8080/api/v1/salas
 ENDPOINT 8 : X
 ENDPOINT 9 : X
 ENDPOINT 10 : X
@@ -15,9 +37,6 @@ ENDPOINT 13 : X
 ENDPOINT 14 : X
 ENDPOINT 15 : X
 ENDPOINT 16 : X
-
-
-
 
 
 ////////////

@@ -12,10 +12,10 @@ import java.util.List;
 @RequiredArgsConstructor
 public class SalaService {
 
-    private final ISalaRepository repository;
+    private final ISalaRepository salaRepository;
     private final SalaMapper mapper;
 
     public List<SalaDTO> consultarSalasYCapacidades() {
-        return mapper.toDTO(repository.findAll());
+        return mapper.toDTO(salaRepository.findAll());
     }
 }

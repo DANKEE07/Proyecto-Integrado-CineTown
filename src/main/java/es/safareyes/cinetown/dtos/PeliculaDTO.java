@@ -3,13 +3,11 @@ package es.safareyes.cinetown.dtos;
 import java.util.List;
 
 public record PeliculaDTO(
-        Integer id,
-        String titulo,
         Integer anio,
+        String titulo,
         String clasificacion,
-        String sinopsis,
         Integer duracion,
-        Boolean activo,
+        String sinopsis,
         List<GeneroDTO> generos
 ) {
 }
