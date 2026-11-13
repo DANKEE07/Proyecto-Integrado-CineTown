@@ -25,6 +25,9 @@ public class Sesion {
     @Column(name = "precio_base")
     private float precioBase;
 
+    @Column(name = "plazas_disponibles")
+    private int plazasDisponibles;
+
     @Column(name = "fecha_hora_inicio")
     private LocalDateTime fechaHoraInicio;
 

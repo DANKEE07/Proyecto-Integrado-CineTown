@@ -1,5 +1,5 @@
 
-ENDPOINT 1 : OK     -> GET http://localhost:8080/api/v1/peliculas/
+ENDPOINT 1 : OK     -> GET http://localhost:8080/api/v1/peliculas
 ENDPOINT 2 : OK     -> GET http://localhost:8080/api/v1/peliculas/{id}
 ENDPOINT 3 : OK     -> POST http://localhost:8080/api/v1/peliculas
 
@@ -25,10 +25,25 @@ ENDPOINT 4 : OK     -> PUT http://localhost:8080/api/v1/peliculas/1
     "generos": [1, 2]
 }
 
-ENDPOINT 5 : ...
+ENDPOINT 5 : OK     -> PATCH http://localhost:8080/api/v1/peliculas/{id}/cartelera
+
+{
+    "activo": false
+}
+
+// Si se quiere activar la película basta con simplemente cambiar el "false" por "true"
+
 ENDPOINT 6 : OK     -> GET http://localhost:8080/api/v1/generos
 ENDPOINT 7 : OK     -> GET http://localhost:8080/api/v1/salas
-ENDPOINT 8 : X
+ENDPOINT 8 : OK     -> POST http://localhost:8080/api/v1/sesiones
+
+{
+    "precioBase": 8.5,
+    "fechaHoraInicio": "2026-11-20T18:00:00",
+    "idSala": 2,
+    "idPelicula": 10
+}
+
 ENDPOINT 9 : X
 ENDPOINT 10 : X
 ENDPOINT 11 : X

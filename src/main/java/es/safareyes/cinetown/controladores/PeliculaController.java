@@ -1,5 +1,6 @@
 package es.safareyes.cinetown.controladores;
 
+import es.safareyes.cinetown.dtos.CambiarEstadoPeliculaDTO;
 import es.safareyes.cinetown.dtos.CrearPeliculaDTO;
 import es.safareyes.cinetown.dtos.PeliculaDTO;
 import es.safareyes.cinetown.servicios.PeliculaService;
@@ -40,6 +41,11 @@ public class PeliculaController {
     @PutMapping("/{id}")
     public PeliculaDTO modificarPelicula(@PathVariable Integer id, @Valid @RequestBody CrearPeliculaDTO dto) {
         return peliculaService.modificarPelicula(id, dto);
+    }
+
+    @PatchMapping("/{id}/cartelera")
+    public PeliculaDTO cambiarEstadoPelicula(@PathVariable Integer id, @Valid @RequestBody CambiarEstadoPeliculaDTO dto) {
+        return peliculaService.cambiarEstadoPelicula(id, dto);
     }
 
 }

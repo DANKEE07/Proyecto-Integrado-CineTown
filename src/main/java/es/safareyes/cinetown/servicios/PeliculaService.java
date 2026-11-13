@@ -1,6 +1,7 @@
 package es.safareyes.cinetown.servicios;
 
 import es.safareyes.cinetown.conversores.PeliculaMapper;
+import es.safareyes.cinetown.dtos.CambiarEstadoPeliculaDTO;
 import es.safareyes.cinetown.dtos.CrearPeliculaDTO;
 import es.safareyes.cinetown.dtos.PeliculaDTO;
 import es.safareyes.cinetown.excepciones.ElementoNoEncontrado;
@@ -70,6 +71,15 @@ public class PeliculaService {
         pelicula.setDuracion(dto.duracion());
         pelicula.setSinopsis(dto.sinopsis());
         pelicula.setGeneros(generos);
+
+        return peliculaMapper.toDTO(peliculaRepository.save(pelicula));
+    }
+
+    @Transactional
+    public PeliculaDTO cambiarEstadoPelicula(Integer id, CambiarEstadoPeliculaDTO dto) {
+        Pelicula pelicula = peliculaRepository.findById(id).orElseThrow(() -> new ElementoNoEncontrado("Pelicula no encontrada"));
+
+        pelicula.setActivo(dto.activo());
 
         return peliculaMapper.toDTO(peliculaRepository.save(pelicula));
     }

@@ -67,6 +67,7 @@ CREATE TABLE "sala"(
 CREATE TABLE "sesion"(
     "id" SERIAL NOT NULL,
     "precio_base" FLOAT(53) NOT NULL,
+    "plazas_disponibles" INTEGER NOT NULL,
     "fecha_hora_inicio" TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL,
     "fecha_hora_fin" TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL,
     "id_sala" INTEGER NOT NULL,
