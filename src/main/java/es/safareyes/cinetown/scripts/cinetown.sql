@@ -133,3 +133,5 @@ CREATE TABLE "compra"
         FOREIGN KEY ("id_usuario")
             REFERENCES "usuario" ("id")
 );
+
+ALTER TABLE compra ADD COLUMN codigo VARCHAR(8) UNIQUE;

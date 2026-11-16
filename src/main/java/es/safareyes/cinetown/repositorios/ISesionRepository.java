@@ -1,7 +1,9 @@
 package es.safareyes.cinetown.repositorios;
 
 import es.safareyes.cinetown.modelos.Sesion;
+import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
@@ -13,8 +15,11 @@ import java.util.List;
 @Repository
 public interface ISesionRepository extends JpaRepository<Sesion, Integer> {
 
+
+
     boolean existsBySalaIdAndFechaHoraInicioLessThanAndFechaHoraFinGreaterThan(Integer salaId, LocalDateTime fechaHoraInicioConLimpieza,
                                                                                LocalDateTime fechaHoraFinConLimpieza);
+
 
 
     @Query(value = "    SELECT s.* FROM sesion s\n" +
@@ -24,4 +29,16 @@ public interface ISesionRepository extends JpaRepository<Sesion, Integer> {
             @Param("fecha") LocalDate fecha,
             @Param("peliculaId") Integer peliculaId
     );
+
+
+
+    @Modifying
+    @Transactional
+    @Query(value = "UPDATE sesion SET plazas_disponibles = plazas_disponibles - :cantidad " +
+            "WHERE id = :idSesion AND plazas_disponibles >= :cantidad", nativeQuery = true)
+
+    int descontarPlazas(@Param("idSesion") Integer idSesion,
+                        @Param("cantidad") Integer cantidad);
+
+
 }

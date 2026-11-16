@@ -38,6 +38,9 @@ public class Compra {
     @Column(name = "estado")
     private String estado;
 
+    @Column(name = "codigo")
+    private String codigo;
+
     @ManyToOne
     @JoinColumn(name = "id_sesion")
     private Sesion sesion;

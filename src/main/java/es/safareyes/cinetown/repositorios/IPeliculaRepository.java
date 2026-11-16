@@ -13,6 +13,20 @@ import java.util.Optional;
 @Repository
 public interface IPeliculaRepository extends JpaRepository<Pelicula, Integer> {
 
+    // ******** REPOSITORIES TEST
+
+    @Query("SELECT DISTINCT p FROM Pelicula p LEFT JOIN FETCH p.generos WHERE p.titulo LIKE %:titulo%")
+    List<Pelicula> buscarPorTitulo(@Param("titulo") String titulo);
+
+
+
+    @Query("SELECT DISTINCT p FROM Pelicula p LEFT JOIN FETCH p.generos WHERE p.id = :id")
+    List<Pelicula> buscarPorIdConGenerosParaTest(@Param("id") Integer id);
+
+    // ********
+
+
+
     // Listado paginado con Filtros (Filtro de nombre)
     @Query("SELECT DISTINCT p FROM Pelicula p LEFT JOIN FETCH p.generos")
     List<Pelicula> buscarTodasLasPeliculasConGeneros();
@@ -22,5 +36,7 @@ public interface IPeliculaRepository extends JpaRepository<Pelicula, Integer> {
     // Detalle y género de la película
     @Query("SELECT DISTINCT p FROM Pelicula p LEFT JOIN FETCH p.generos WHERE p.id = :id")
     Optional<Pelicula> buscarPorIdConGeneros(@Param("id") Integer id);
+
+
 
 }
