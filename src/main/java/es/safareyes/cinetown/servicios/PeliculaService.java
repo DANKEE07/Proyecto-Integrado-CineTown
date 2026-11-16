@@ -25,22 +25,29 @@ public class PeliculaService {
     private final PeliculaMapper peliculaMapper;
     private final IGeneroRepository generoRepository;
 
+
     public PeliculaDTO consultarPorIdConGeneros(Integer id) {
         return peliculaRepository.buscarPorIdConGeneros(id).map(peliculaMapper::toDTO)
                 .orElseThrow(() -> new ElementoNoEncontrado("Pelicula no encontrada"));
     }
 
+
+
     public Page<PeliculaDTO> buscarTodasLasPeliculas(Pageable pageable) {
         return peliculaRepository.findAll(pageable).map(peliculaMapper::toDTO);
     }
+
+
 
     @Transactional
     public PeliculaDTO crearPelicula(CrearPeliculaDTO dto) {
 
         List<Genero> generos = generoRepository.findAllById(dto.generos());
 
+
         if (generos.size() != dto.generos().size())
             throw new ElementoNoEncontrado("Uno o más generos no existen");
+
 
         Pelicula pelicula = new Pelicula();
 
@@ -52,18 +59,24 @@ public class PeliculaService {
         pelicula.setSinopsis(dto.sinopsis());
         pelicula.setGeneros(generos);
 
+
         return peliculaMapper.toDTO(peliculaRepository.save(pelicula));
     }
+
+
 
     @Transactional
     public PeliculaDTO modificarPelicula(Integer id, CrearPeliculaDTO dto) {
         Pelicula pelicula = peliculaRepository.findById(id).orElseThrow(() -> new ElementoNoEncontrado("Pelicula no encontrada"));
 
+
         List<Genero> generos = generoRepository.findAllById(dto.generos());
+
 
         if (generos.size() != dto.generos().size()) {
             throw new ElementoNoEncontrado("Uno o más generos no existen");
         }
+
 
         pelicula.setAnio(dto.anio());
         pelicula.setTitulo(dto.titulo());
@@ -72,8 +85,12 @@ public class PeliculaService {
         pelicula.setSinopsis(dto.sinopsis());
         pelicula.setGeneros(generos);
 
+
         return peliculaMapper.toDTO(peliculaRepository.save(pelicula));
+
     }
+
+
 
     @Transactional
     public PeliculaDTO cambiarEstadoPelicula(Integer id, CambiarEstadoPeliculaDTO dto) {

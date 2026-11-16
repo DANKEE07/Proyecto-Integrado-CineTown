@@ -16,4 +16,7 @@ public interface IGeneroRepository extends JpaRepository<Genero, Integer> {
             "LEFT JOIN pelicula p ON pg.id_pelicula = p.id AND p.activo = true " +
             "GROUP BY g.id, g.nombre", nativeQuery = true)
     List<GeneroCarteleraProyeccion> contarGenerosConPeliculasEnCartelera();
+
+
+
 }

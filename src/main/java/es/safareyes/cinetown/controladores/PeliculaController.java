@@ -21,10 +21,13 @@ public class PeliculaController {
 
     private PeliculaService peliculaService;
 
+
     @GetMapping("/{id}")
     public PeliculaDTO consultarPorId(@PathVariable Integer id) {
         return peliculaService.consultarPorIdConGeneros(id);
     }
+
+
 
     @Transactional(readOnly = true)
     @GetMapping()
@@ -33,15 +36,21 @@ public class PeliculaController {
         return peliculaService.buscarTodasLasPeliculas(page);
     }
 
+
+
     @PostMapping()
     public PeliculaDTO crearPelicula(@Valid @RequestBody CrearPeliculaDTO dto) {
         return peliculaService.crearPelicula(dto);
     }
 
+
+
     @PutMapping("/{id}")
     public PeliculaDTO modificarPelicula(@PathVariable Integer id, @Valid @RequestBody CrearPeliculaDTO dto) {
         return peliculaService.modificarPelicula(id, dto);
     }
+
+
 
     @PatchMapping("/{id}/cartelera")
     public PeliculaDTO cambiarEstadoPelicula(@PathVariable Integer id, @Valid @RequestBody CambiarEstadoPeliculaDTO dto) {

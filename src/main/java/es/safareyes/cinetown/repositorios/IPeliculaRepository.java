@@ -17,6 +17,8 @@ public interface IPeliculaRepository extends JpaRepository<Pelicula, Integer> {
     @Query("SELECT DISTINCT p FROM Pelicula p LEFT JOIN FETCH p.generos")
     List<Pelicula> buscarTodasLasPeliculasConGeneros();
 
+
+
     // Detalle y género de la película
     @Query("SELECT DISTINCT p FROM Pelicula p LEFT JOIN FETCH p.generos WHERE p.id = :id")
     Optional<Pelicula> buscarPorIdConGeneros(@Param("id") Integer id);

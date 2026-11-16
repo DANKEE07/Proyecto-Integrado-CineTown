@@ -15,6 +15,7 @@ public class GeneroController {
 
     private GeneroService service;
 
+
     // Consultar géneros con el número de películas en cartelera
     @GetMapping
     public List<GeneroCarteleraDTO> consultarGenerosConPeliculasEnCartelera() {

@@ -15,8 +15,11 @@ import es.safareyes.cinetown.repositorios.ISalaRepository;
 import es.safareyes.cinetown.repositorios.ISesionRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import tools.jackson.databind.cfg.MapperBuilder;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 @AllArgsConstructor
@@ -26,12 +29,17 @@ public class SesionService {
     private final ISalaRepository salaRepository;
     private final IPeliculaRepository peliculaRepository;
     private final SesionMapper sesionMapper;
+    private final MapperBuilder mapperBuilder;
+
 
     public SesionDTO crearSesion(CrearSesionDTO dto) {
 
-        Pelicula pelicula = peliculaRepository.findById(dto.idPelicula()).orElseThrow(() -> new ElementoNoEncontrado("Película no encontrada"));
+        Pelicula pelicula = peliculaRepository.findById(dto.idPelicula())
+                .orElseThrow(() -> new ElementoNoEncontrado("Película no encontrada"));
 
-        Sala sala = salaRepository.findById(dto.idSala()).orElseThrow(() -> new ElementoNoEncontrado("Sala no encontrada"));
+        Sala sala = salaRepository.findById(dto.idSala())
+                .orElseThrow(() -> new ElementoNoEncontrado("Sala no encontrada"));
+
 
         if (!pelicula.getActivo())
             throw new SesionConPeliculaInactiva("No se puede crear una sesión de una película que no está activa");
@@ -40,14 +48,17 @@ public class SesionService {
         if (!dto.fechaHoraInicio().isAfter(LocalDateTime.now()))
             throw new SesionConFechaHoraInicioPasada("No se puede crear una sesión con fecha y hora de inicio pasada");
 
+
         // Para que sume a FechaHoraInicio la duración de la película (minutos) y lo guarde en esta variable
         LocalDateTime fechaHoraFin = dto.fechaHoraInicio().plusMinutes(pelicula.getDuracion());
+
 
         // Para que dé un error si ya hay otra pelicula en ese horario
         boolean existeSolapamiento = sesionRepository.existsBySalaIdAndFechaHoraInicioLessThanAndFechaHoraFinGreaterThan(sala.getId(), fechaHoraFin.plusMinutes(20), dto.fechaHoraInicio().minusMinutes(20));
 
         if (existeSolapamiento)
             throw new SesionSolapada("Ya existe una sesión en esa sala durante ese horario");
+
 
         Sesion sesion = new Sesion();
         sesion.setPrecioBase(dto.precioBase());
@@ -57,8 +68,26 @@ public class SesionService {
         sesion.setPelicula(pelicula);
         sesion.setPlazasDisponibles(sala.getCapacidad());
 
+
         return sesionMapper.sesionToSesionDTO(sesionRepository.save(sesion));
 
+    }
+
+
+
+    public List<SesionDTO> buscarSesionesConPeliculaYAsientos(LocalDate fecha, Integer peliculaId) {
+        List<Sesion> sesiones = sesionRepository.buscarSesiones(fecha, peliculaId);
+
+        return sesionMapper.sesionesToSesionDTOs(sesiones);
+    }
+
+
+
+    public SesionDTO consultarSesionPorId(Integer sesionId) {
+        Sesion sesion = sesionRepository.findById(sesionId)
+                .orElseThrow(() -> new ElementoNoEncontrado("Sala no encontrada"));
+
+        return sesionMapper.sesionToSesionDTO(sesion);
     }
 
 }
