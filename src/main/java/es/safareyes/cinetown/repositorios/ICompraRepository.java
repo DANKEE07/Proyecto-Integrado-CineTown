@@ -6,4 +6,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ICompraRepository extends JpaRepository<Compra, Integer> {
+
+    boolean existsByCodigo(String codigo);
+
 }

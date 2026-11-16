@@ -2,6 +2,7 @@ package es.safareyes.cinetown.dtos;
 
 import jakarta.validation.constraints.*;
 
+// Esto es lo que se recibe desde Postman
 public record CrearCompraDTO(
 
         @NotNull
