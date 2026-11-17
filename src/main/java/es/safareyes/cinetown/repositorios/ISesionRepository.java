@@ -41,4 +41,16 @@ public interface ISesionRepository extends JpaRepository<Sesion, Integer> {
                         @Param("cantidad") Integer cantidad);
 
 
+
+
+    // Para cancelar una compra
+    @Modifying
+    @Transactional
+    @Query(value = "UPDATE sesion SET plazas_disponibles = plazas_disponibles + " +
+            ":cantidad WHERE id = :idSesion", nativeQuery = true)
+
+    int devolverPlazas(@Param("idSesion") Integer idSesion, @Param("cantidad") Integer cantidad);
+
+
+
 }

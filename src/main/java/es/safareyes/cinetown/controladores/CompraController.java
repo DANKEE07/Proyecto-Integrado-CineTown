@@ -5,10 +5,9 @@ import es.safareyes.cinetown.dtos.CrearCompraDTO;
 import es.safareyes.cinetown.servicios.CompraService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/compras")
@@ -21,6 +20,26 @@ public class CompraController {
     @PostMapping
     public CompraDTO crearCompra(@Valid @RequestBody CrearCompraDTO dto) {
         return compraService.crearCompra(dto);
+    }
+
+
+
+    @GetMapping("/{codigo}")
+    public CompraDTO obtenerCompraPorCodigo(@PathVariable String codigo) {
+        return compraService.consultarCompraPorCodigo(codigo);
+    }
+
+
+    @GetMapping
+    public List<CompraDTO> obtenerTodasLasCompras(){
+        return compraService.consultarTodasLasCompras();
+
+    }
+
+
+    @PatchMapping("/{codigo}/cancelar")
+    public CompraDTO cancelarCompraPorCodigo(@PathVariable String codigo){
+        return compraService.cancelarCompra(codigo);
     }
 
 

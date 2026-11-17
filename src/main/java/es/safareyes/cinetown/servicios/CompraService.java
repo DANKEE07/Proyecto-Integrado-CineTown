@@ -6,6 +6,7 @@ import es.safareyes.cinetown.dtos.CrearCompraDTO;
 import es.safareyes.cinetown.excepciones.ElementoNoEncontrado;
 import es.safareyes.cinetown.excepciones.FechaYHoraPosteriorActual;
 import es.safareyes.cinetown.excepciones.NoHaySuficientesPlazas;
+import es.safareyes.cinetown.excepciones.ProblemaAlCancelarCompra;
 import es.safareyes.cinetown.modelos.Compra;
 import es.safareyes.cinetown.modelos.Sesion;
 import es.safareyes.cinetown.modelos.Usuario;
@@ -18,6 +19,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -116,6 +118,70 @@ public class CompraService {
 
         return codigo;
     }
+
+
+
+    // Para encontrar la compra por ID
+    public CompraDTO consultarCompraPorCodigo(String codigo) {
+
+        Compra compra = compraRepository.findByCodigo(codigo)
+                .orElseThrow(() -> new ElementoNoEncontrado("No se encontró la compra"));
+
+
+        return  compraMapper.toDTO(compra);
+
+    }
+
+
+
+
+    // Consultar todas las compras
+    public List<CompraDTO> consultarTodasLasCompras() {
+
+
+        List<Compra> compras = compraRepository.findAll();
+
+        return compraMapper.toDTO(compras);
+
+
+    }
+
+
+    @Transactional
+    public CompraDTO cancelarCompra(String codigo) {
+
+        Compra compra = compraRepository.findByCodigo(codigo)
+                .orElseThrow(() -> new ElementoNoEncontrado("No se encontró la compra"));
+
+
+
+        if (compra.isParkingUsado()) {
+            throw new ProblemaAlCancelarCompra("No se puede cancelar una compra que haya utilizado el parking");
+        }
+
+
+        if (!compra.getEstado().equals("CONFIRMADA")) {
+            throw new ProblemaAlCancelarCompra("La compra no está confirmada");
+        }
+
+
+        if (LocalDateTime.now().isAfter(compra.getSesion().getFechaHoraInicio().minusHours(1))) {
+            throw new ProblemaAlCancelarCompra("No se puede cancelar la compra con menos de 1 hora de antelación");
+        }
+
+
+
+        sesionRepository.devolverPlazas(compra.getSesion().getId(), compra.getNumEntradas());
+
+        compra.setEstado("CANCELADA");
+
+
+        Compra compraGuardada = compraRepository.save(compra);
+        return  compraMapper.toDTO(compraGuardada);
+
+    }
+
+
 
 
 }

@@ -52,12 +52,12 @@ Script prueba para el Post del endpoint 3:
 }
 
 
-\\ ENDPOINT 9 : OK     FILTRAR POR TODAS LAS SESIONES ->     GET http://localhost:8080/api/v1/sesiones
-                    FILTRAR POR FECHA SOLO ->             GET http://localhost:8080/api/v1/sesiones?fecha=2026-11-20
-                    FILTRAR POR ID DE PELICULA ->         GET http://localhost:8080/api/v1/sesiones?peliculaId=1
-                    FILTRAR POR ID DE PELICULA Y FECHA -> GET http://localhost:8080/api/v1/sesiones?fecha=2026-11-20&peliculaId=1
+\\ ENDPOINT 9 : OK     FILTRAR POR TODAS LAS SESIONES     -> GET http://localhost:8080/api/v1/sesiones
+                       FILTRAR POR FECHA SOLO             -> GET http://localhost:8080/api/v1/sesiones?fecha=2026-11-20
+                       FILTRAR POR ID DE PELICULA         -> GET http://localhost:8080/api/v1/sesiones?peliculaId=1
+                       FILTRAR POR ID DE PELICULA Y FECHA -> GET http://localhost:8080/api/v1/sesiones?fecha=2026-11-20&peliculaId=1
 
-\\ ENDPOINT 10 : OK    -> GET http://localhost:8080/api/v1/sesiones/1
+\\ ENDPOINT 10 : OK     -> GET http://localhost:8080/api/v1/sesiones/1
 \\ ENDPOINT 11 : OK     -> POST http://localhost:8080/api/v1/compras
 
 
@@ -69,11 +69,11 @@ Script prueba para el Post del endpoint 3:
 }
 
 
-\\ ENDPOINT 12 : X
-\\ ENDPOINT 13 : X
-\\ ENDPOINT 14 : X
-\\ ENDPOINT 15 : X
-\\ ENDPOINT 16 : X
+\\ ENDPOINT 12 : OK     -> GET http://localhost:8080/api/v1/compras/{codigo}
+\\ ENDPOINT 13 : X      -> GET http://localhost:8080/api/v1/compras
+\\ ENDPOINT 14 : X      -> PATCH http://localhost:8080/api/v1/compras/{codigo}/cancelar
+\\ ENDPOINT 15 : X      ->
+\\ ENDPOINT 16 : X      ->
 
 
 
