@@ -3,6 +3,7 @@ package es.safareyes.cinetown.controladores;
 import es.safareyes.cinetown.dtos.CambiarEstadoPeliculaDTO;
 import es.safareyes.cinetown.dtos.CrearPeliculaDTO;
 import es.safareyes.cinetown.dtos.PeliculaDTO;
+import es.safareyes.cinetown.dtos.RecaudacionDTO;
 import es.safareyes.cinetown.servicios.PeliculaService;
 import org.springframework.transaction.annotation.Transactional;
 import jakarta.validation.Valid;
@@ -56,5 +57,14 @@ public class PeliculaController {
     public PeliculaDTO cambiarEstadoPelicula(@PathVariable Integer id, @Valid @RequestBody CambiarEstadoPeliculaDTO dto) {
         return peliculaService.cambiarEstadoPelicula(id, dto);
     }
+
+
+    // Ver la recaudación del dinero total
+    // (Si una pelicula está deasctivada, sale null en el postman)
+    @GetMapping("/{id}/recaudacion")
+    public RecaudacionDTO consultarRecaudacion(@PathVariable Integer id) {
+        return peliculaService.consultarRecaudacion(id);
+    }
+
 
 }

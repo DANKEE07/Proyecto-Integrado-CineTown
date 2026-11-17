@@ -1,6 +1,7 @@
 package es.safareyes.cinetown.repositorios;
 
 import es.safareyes.cinetown.dtos.PeliculaDTO;
+import es.safareyes.cinetown.dtos.RecaudacionDTO;
 import es.safareyes.cinetown.modelos.Pelicula;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -38,5 +39,11 @@ public interface IPeliculaRepository extends JpaRepository<Pelicula, Integer> {
     Optional<Pelicula> buscarPorIdConGeneros(@Param("id") Integer id);
 
 
+
+    // Obtener la recaudación=
+    @Query("SELECT new es.safareyes.cinetown.dtos.RecaudacionDTO(SUM(c.numEntradas), " +
+            "SUM (c.precioTotal)) FROM Sesion s Join s.compras c WHERE s.pelicula.id = :id AND c.estado = 'CONFIRMADA'")
+
+    RecaudacionDTO obtenerRecaudacion(@Param("id") Integer id);
 
 }

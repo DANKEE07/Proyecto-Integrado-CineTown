@@ -135,3 +135,4 @@ CREATE TABLE "compra"
 );
 
 ALTER TABLE compra ADD COLUMN codigo VARCHAR(8) UNIQUE;
+

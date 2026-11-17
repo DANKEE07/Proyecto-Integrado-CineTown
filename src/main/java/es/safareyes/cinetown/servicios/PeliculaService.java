@@ -4,6 +4,7 @@ import es.safareyes.cinetown.conversores.PeliculaMapper;
 import es.safareyes.cinetown.dtos.CambiarEstadoPeliculaDTO;
 import es.safareyes.cinetown.dtos.CrearPeliculaDTO;
 import es.safareyes.cinetown.dtos.PeliculaDTO;
+import es.safareyes.cinetown.dtos.RecaudacionDTO;
 import es.safareyes.cinetown.excepciones.ElementoNoEncontrado;
 import es.safareyes.cinetown.modelos.Genero;
 import es.safareyes.cinetown.modelos.Pelicula;
@@ -100,5 +101,12 @@ public class PeliculaService {
 
         return peliculaMapper.toDTO(peliculaRepository.save(pelicula));
     }
+
+
+
+    public RecaudacionDTO consultarRecaudacion(Integer id) {
+        return peliculaRepository.obtenerRecaudacion(id);
+    }
+
 
 }
