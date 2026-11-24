@@ -53,4 +53,17 @@ public interface ISesionRepository extends JpaRepository<Sesion, Integer> {
 
 
 
+
+    // Porcentaje de ocupación
+    @Query(value = "SELECT s.id, p.titulo, sa.numero, COALESCE(SUM(c.num_entradas), 0), ROUND(COALESCE(SUM(c.num_entradas), 0) " +
+            "* 100.0 / sa.capacidad, 2) FROM sesion s JOIN pelicula p ON s.id_pelicula = p.id " +
+            "JOIN sala sa ON s.id_sala = sa.id LEFT JOIN compra c ON c.id_sesion = s.id " +
+            "AND c.estado = 'CONFIRMADA' WHERE CAST(s.fecha_hora_inicio AS DATE) = :fecha " +
+            "GROUP BY s.id, p.titulo, sa.numero, sa.capacidad " +
+            "ORDER BY s.fecha_hora_inicio", nativeQuery = true)
+
+    // He estado mirando y he tenido que usar el COALESCE, porque si se diera el caso que no hubiera compras confirmadas
+    // me daría null, entonces buscando después de darme cuenta he visto que el COALESCE transforma el null en 0
+
+    List<Object[]> obtenerOcupacion(@Param("fecha") LocalDate fecha);
 }

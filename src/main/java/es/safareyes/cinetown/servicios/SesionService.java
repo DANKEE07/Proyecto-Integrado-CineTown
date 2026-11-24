@@ -2,6 +2,7 @@ package es.safareyes.cinetown.servicios;
 
 import es.safareyes.cinetown.conversores.SesionMapper;
 import es.safareyes.cinetown.dtos.CrearSesionDTO;
+import es.safareyes.cinetown.dtos.OcupacionDTO;
 import es.safareyes.cinetown.dtos.SesionDTO;
 import es.safareyes.cinetown.excepciones.ElementoNoEncontrado;
 import es.safareyes.cinetown.excepciones.SesionConFechaHoraInicioPasada;
@@ -20,6 +21,7 @@ import tools.jackson.databind.cfg.MapperBuilder;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -89,5 +91,20 @@ public class SesionService {
 
         return sesionMapper.sesionToSesionDTO(sesion);
     }
+
+
+
+    public List<OcupacionDTO> consultarOcupacionPorSesion(LocalDate fecha) {
+
+        List<Object[]> ocupaciones = sesionRepository.obtenerOcupacion(fecha);
+
+        return ocupaciones.stream().map(fila -> new OcupacionDTO(
+                (Integer) fila[0],
+                (String) fila[1],
+                (Integer) fila[2],
+                ((Number) fila[3]).longValue(),
+                ((Number) fila[4]).doubleValue())).toList();
+    }
+
 
 }
