@@ -104,6 +104,16 @@ public class SesionService {
                 (Integer) fila[2],
                 ((Number) fila[3]).longValue(),
                 ((Number) fila[4]).doubleValue())).toList();
+
+        // Esta parte me ha costado, porque como he decidido usar un array de objetos
+        // tenía que mapear cada fila a un objeto (Por ejemplo, la fila[0] sería el id, este
+        // se encargaría de mappear el id ya que es el primero de OcupacionDTO el segundo sería
+        // el nombre de la pelicula, ya que al igual que el anterior es el que tengo en el DTO
+        // (por eso el segundo es un String, porque es el título), y al final con el .stream()
+        // lo que hago es recorrer los elementos, así cada fila me da un objeto el cual puedo usar y modificar
+        // con el .map() Después simplemente le pongo el .toList() para volver a pasarlo a una lista
+
+        // (me ha faltado llorar haciendo esto Luis)
     }
 
 

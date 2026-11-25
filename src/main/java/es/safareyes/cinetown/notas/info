@@ -73,7 +73,7 @@ Script prueba para el Post del endpoint 3:
 \\ ENDPOINT 13 : OK     -> GET http://localhost:8080/api/v1/compras
 \\ ENDPOINT 14 : OK     -> PATCH http://localhost:8080/api/v1/compras/{codigo}/cancelar
 \\ ENDPOINT 15 : OK     -> GET http://localhost:8080/api/v1/peliculas/{id}/recaudacion
-\\ ENDPOINT 16 : X      ->
+\\ ENDPOINT 16 : X      -> GET http://localhost:8080/api/v1/informes/ocupacion?fecha=2026-11-25
 
 
 
