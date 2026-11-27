@@ -32,9 +32,13 @@ public class PeliculaController {
 
     @Transactional(readOnly = true)
     @GetMapping()
-    public Page<PeliculaDTO> buscarTodasLasPeliculas(
-            @PageableDefault(size = 10, sort = "id", direction = Sort.Direction.ASC) Pageable page) {
-        return peliculaService.buscarTodasLasPeliculas(page);
+    public Page<PeliculaDTO> buscarTodasLasPeliculas(@RequestParam(required = false) String genero,
+                                                     @RequestParam(required = false) Integer anio,
+                                                     @RequestParam(required = false) String clasificacion,
+                                                     @RequestParam(required = false) String titulo,
+                                                     @RequestParam(required = false) Boolean activo,
+                                                     @PageableDefault(size = 10, sort = "id", direction = Sort.Direction.ASC) Pageable page) {
+        return peliculaService.buscarTodasLasPeliculas(genero,clasificacion,titulo,anio,activo,page);
     }
 
 

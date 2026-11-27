@@ -34,8 +34,8 @@ public class PeliculaService {
 
 
 
-    public Page<PeliculaDTO> buscarTodasLasPeliculas(Pageable pageable) {
-        return peliculaRepository.findAll(pageable).map(peliculaMapper::toDTO);
+    public Page<PeliculaDTO> buscarTodasLasPeliculas(String genero, String clasificacion, String titulo, Integer anio, Boolean activo, Pageable pageable) {
+        return peliculaRepository.buscarConFiltros(genero, clasificacion, titulo, activo, anio, pageable).map(peliculaMapper::toDTO);
     }
 
 
